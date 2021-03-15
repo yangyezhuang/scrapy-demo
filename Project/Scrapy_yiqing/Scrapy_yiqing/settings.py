@@ -1,4 +1,4 @@
-# Scrapy settings for liepin project
+# Scrapy settings for Scrapy_yiqing project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,13 +7,13 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'liepin'
+BOT_NAME = 'Scrapy_yiqing'
 
-SPIDER_MODULES = ['liepin.spiders']
-NEWSPIDER_MODULE = 'liepin.spiders'
+SPIDER_MODULES = ['Scrapy_yiqing.spiders']
+NEWSPIDER_MODULE = 'Scrapy_yiqing.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'liepin (+http://www.yourdomain.com)'
+# USER_AGENT = 'Scrapy_yiqing (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -24,7 +24,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -39,20 +39,20 @@ DOWNLOAD_DELAY = 3
 DEFAULT_REQUEST_HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36'
 }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'liepin.middlewares.LiepinSpiderMiddleware': 543,
+#    'Scrapy_yiqing.middlewares.ScrapyYiqingSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'liepin.middlewares.LiepinDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    'Scrapy_yiqing.middlewares.ScrapyYiqingDownloaderMiddleware': 543,
+    'Scrapy_yiqing.middlewares.RandomUserAgent': 544,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -63,16 +63,9 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'liepin.pipelines.LiepinPipeline': 300,
-     # 'liepin.pipelines.MysqlPipeline': 301,
+    # 'Scrapy_yiqing.pipelines.ScrapyYiqingPipeline': 300,
+    'Scrapy_yiqing.pipelines.Mysql_Pipeline': 301,
 }
-
-# MySQL 配置
-MYSQL_HOST = 'localhost'
-MYSQL_DATABASE = 'test'
-MYSQL_PORT = 3306
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'mysql'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

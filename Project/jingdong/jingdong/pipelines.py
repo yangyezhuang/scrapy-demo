@@ -1,39 +1,32 @@
 from itemadapter import ItemAdapter
+
 import json
 import pymysql
 
 
-class LiepinPipeline:
-    '''
+class JingdongPipeline(object):
+    """
     json存储
-    '''
+    """
 
-    # 打开文件
     def __init__(self):
-        self.file = open('job.json', 'w', encoding='utf-8')
+        # def open_spider(self, spider):
+        self.file = open('jd.json', 'w', encoding='utf-8')
+        self.file.write('[')
 
-    # 调用该方法处理数据
     def process_item(self, item, spider):
-        # 读取item中的数据
-        line = json.dumps(dict(item), ensure_ascii=False) + "\n"
-        # 写入文件
+        line = json.dumps(dict(item), ensure_ascii=False) + ",\n"
         self.file.write(line)
-        # 返回item
         return item
 
-    # 该方法在spider被开启时被调用。
-    def open_spider(self, spider):
-        pass
-
-    # 该方法在spider被关闭时被调用。
     def close_spider(self, spider):
-        pass
+        self.file.write(']')
 
 
 class MysqlPipeline:
-    '''
-    MySQL存储
-    '''
+    """
+    MySQL同步存储
+    """
 
     def __init__(self):
         self.db = pymysql.connect(host='localhost', database='spider_data', user='root', password='mysql', port=3306)
@@ -42,7 +35,7 @@ class MysqlPipeline:
 
     def process_item(self, item, spider):
         data = dict(item)
-        table = 'liepin'
+        table = 'jd'
         keys = ','.join(data.keys())
         values = ','.join(['%s'] * len(data))
         sql = 'insert into %s (%s) values (%s)' % (table, keys, values)

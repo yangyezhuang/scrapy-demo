@@ -20,6 +20,7 @@ class JobSpider(scrapy.Spider):
         yield Request(url=self.start_urls.format(keyword=self.keyword, page=page), callback=self.parse,
                       meta={'page': page})
 
+
     def parse(self, response):
         '''
         列表页
